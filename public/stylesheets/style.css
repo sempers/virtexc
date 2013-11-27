@@ -1,0 +1,71 @@
+.disabled {
+    color: #999;
+}
+.trade-button {
+    width: 30px;
+}
+
+.total-button {
+    width: 40px;
+}
+
+.conn-status {
+    color: #555;
+    font-size: 70%;
+}
+
+.conn-status .established {
+    color: orange;
+}
+
+.conn-status .online {
+    color: lime;
+}
+
+.conn-status .offline {
+    color: red;
+}
+
+.main-div {
+    margin: 30px auto 30px 250px;
+}
+
+.left-panel {
+    padding-top: 5px;
+    margin-right: 20px;
+    float: left;
+}
+
+.va td,
+.va th{
+    vertical-align: middle;
+    text-align: center;
+}
+
+.log {
+    background: #f0f0f0;
+    border: 1px solid #dddddd;
+    border-collapse: separate;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    margin-top: 4px;
+    font-size: 80%;
+    min-height: 645px;
+    max-height: 645px;
+}
+.stock-data {
+    vertical-align: middle;
+}
+
+.restart-panel {
+    clear: right;
+    float: right;
+    font-size: 90%;
+}
+
+.restart-panel input {
+    width: 40px;
+    height: 12px;
+    vertical-align: baseline;
+}
