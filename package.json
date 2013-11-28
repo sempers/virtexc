@@ -1,6 +1,6 @@
 {
-	"name": "nockmarket",
-	"version": "0.0.1",
+	"name": "virtexc",
+	"version": "0.0.1-1",
 	"private": true,
 	"dependencies": {
 		"mongodb": "*",
@@ -10,5 +10,12 @@
 		"should": "1.0.0",
 		"socket.io": "*",
 		"cookie": "0.0.4"
-		}
+	},
+	"subdomain": "virtexc",
+	"scripts": {
+		"start": "node app.js"
+	},
+	"engines": {
+		"node": "0.10.x"
+	}
 }
