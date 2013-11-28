@@ -9,9 +9,18 @@
     width: 40px;
 }
 
+.upper-line {
+	color: #555;    
+    width: 100%;
+    background: #fcfcfc;
+    border-bottom: 1px solid #ddd;
+    display: inline;
+}
+
 .conn-status {
-    color: #555;
-    font-size: 70%;
+	clear: left;
+	float: left;
+	font-size: 80%;
 }
 
 .conn-status .established {
@@ -26,20 +35,41 @@
     color: red;
 }
 
-.main-div {
-    margin: 30px auto 30px 250px;
+.main-container {
+	margin: 0 150px 30px 150px;
 }
+
+.restart-panel {
+    clear: right;
+    float: right;
+    font-size: 80%;
+}
+
+.restart-panel input {
+    width: 40px;
+    height: 12px;
+    vertical-align: baseline;
+}
+
+
+
+
+.trade-ui-container {
+	border: 1px solid #dddddd;
+    border-collapse: separate;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    min-height: 645px;
+    max-height: 645px;
+    margin-top: 4px;
+}
+
 
 .left-panel {
     padding-top: 5px;
     margin-right: 20px;
     float: left;
-}
-
-.va td,
-.va th{
-    vertical-align: middle;
-    text-align: center;
 }
 
 .log {
@@ -54,18 +84,17 @@
     min-height: 645px;
     max-height: 645px;
 }
+
+
+
+
 .stock-data {
     vertical-align: middle;
 }
 
-.restart-panel {
-    clear: right;
-    float: right;
-    font-size: 90%;
+.va td,
+.va th{
+    vertical-align: middle;
+    text-align: center;
 }
 
-.restart-panel input {
-    width: 40px;
-    height: 12px;
-    vertical-align: baseline;
-}

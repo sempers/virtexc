@@ -39,8 +39,9 @@ function submitRandomOrder(timeFactor, stock) {
 	return;
 
     var exchangeData = allData[stock];
-
-    exchangeData.order();
+    
+    var order = exchangeData.genOrder();
+    exchangeData.putOrder(order);
     exchangeData.clear();
 
     if (exchangeData.trades && exchangeData.trades.length > 0) {
