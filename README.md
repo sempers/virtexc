@@ -6,7 +6,7 @@
  as Issuer can at any moment issue extra securities or proceed buyout.
  Any stock can be followed on a candlestick chart.
 
- Techies: Node.js + Express + Bootstrap + Backbone.js + Socket.io + Highstocks.Stockcharts
+ Techies: Node.js + Express + Bootstrap + Backbone.js + Socket.io + Highstocks.Stockcharts + mongodb/Mongoose
  
 ## License
 MIT
