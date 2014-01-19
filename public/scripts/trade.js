@@ -51,6 +51,9 @@ $.get('/templates/trade-table.ejs', function(storedTemplate) {
 				var value = newData[attr];
 				$('#' + newData.st + attr).html(value);
 			}
+            if (typeof pageChart !== "undefined" && pageChart.stock === newData.st){
+                pageChart.update(newData.timestamp, newData.tp, newData.tv);
+            }
 		}
 	});
 

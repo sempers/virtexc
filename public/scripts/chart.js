@@ -1,4 +1,53 @@
-var getChartId = null;
+var global_cache = { currentStock: ""};
+
+var pageChart =
+{
+    chart: null,
+    stock: "",
+    load: function() {
+        var self = this;
+        var cache = global_cache[this.stock] || {
+            data: [],
+            last_id: null,
+            openPrice: null,
+            stock: null
+        };
+        global_cache[this.stock] = cache;
+
+        $.getJSON("/api/trades1/"
+            + this.stock
+            + ((cache.last_id) ? "/?last_id=" + cache.last_id : "")
+            + ((cache.openPrice) ? "&openPrice=" + cache.openPrice
+            : ""), function(_data) {
+            cache.data = cache.data.concat(_data.points);
+            cache.last_id = _data.last_id;
+            cache.openPrice = _data.openPrice;
+            cache.stock = self.stock;
+
+            if (self.chart.series[0].data.length === 0) {
+                self.chart.series[0].setData(cache.data.map(function(point) {
+                    return [ point[0], point[1], point[2], point[3], point[4] ];
+                }));
+                self.chart.series[1].setData(cache.data.map(function(point) {
+                    return [ point[0], point[5] ];
+                }));
+            } else {
+                _data.points.forEach(function(point) {
+                    self.chart.series[0].addPoint([ point[0], point[1], point[2],
+                        point[3], point[4] ], false);
+                    self.chart.series[1].addPoint([ point[0], point[5] ], false);
+                });
+            }
+            self.chart.redraw();
+        });
+    },
+
+    update: function(timestamp, price, volume) {
+        this.chart.series[0].addPoint([ timestamp, price, price, price, price], true);
+        this.chart.series[1].addPoint([timestamp, volume], true);
+    }
+}
+
 
 var cache = {
 		data: [],
@@ -12,6 +61,14 @@ var chartOptions = {
         animation : false,
         panning : false,
         renderTo : "graph"
+    },
+
+    navigator: {
+
+    },
+
+    loading: {
+      showDuration: 500
     },
 
     plotOptions : {
@@ -74,8 +131,7 @@ var chartOptions = {
 	                    minute : [ '%A, %b %e, %H:%M:%S',
 	                            '%A, %b %e, %H:%M:%S', '-%H:%M:%S' ]
                     },
-                    units : [ [ 'second', [ 10 ] ],
-                            [ 'minute', [ 1, 5, 15, 30 ] ],
+                    units : [ [ 'minute', [ 1, 5, 15, 30 ] ],
                             [ 'hour', [ 1, 4 ] ], [ 'day', [ 1 ] ]
 
                     ]
@@ -93,42 +149,11 @@ var chartOptions = {
 	                    minute : [ '%A, %b %e, %H:%M:%S',
 	                            '%A, %b %e, %H:%M:%S', '-%H:%M:%S' ]
                     },
-                    units : [ [ 'second', [ 10 ] ],
-                            [ 'minute', [ 1, 5, 15, 30 ] ],
+                    units : [ [ 'minute', [ 1, 5, 15, 30 ] ],
                             [ 'hour', [ 1, 4 ] ], [ 'day', [ 1 ] ] ]
                 },
                 zIndex: 1
             } ]
-}
-
-function loadData(_chart, stock) {
-	$.getJSON("/api/trades1/"
-	        + stock
-	        + ((cache.last_id) ? "/?last_id=" + cache.last_id : "")
-	        + ((cache.openPrice) ? "&openPrice=" + cache.openPrice
-	                : ""), function(_data) {
-		cache.data = cache.data.concat(_data.points);
-		cache.last_id = _data.last_id;
-		cache.openPrice = _data.openPrice;
-		cache.stock = stock;
-		//console.log("Received points: ", _data.points);
-
-		if (_chart.series[0].data.length === 0) {
-			_chart.series[0].setData(cache.data.map(function(point) {
-				return [ point[0], point[1], point[2], point[3], point[4] ];
-			}));
-			_chart.series[1].setData(cache.data.map(function(point) {
-				return [ point[0], point[5] ];
-			}))
-		} else {
-			_data.points.forEach(function(point) {
-				_chart.series[0].addPoint([ point[0], point[1], point[2],
-				        point[3], point[4] ], false);
-				_chart.series[1].addPoint([ point[0], point[5] ], false);
-			});
-		}
-		_chart.redraw();
-	});
 }
 
 function setStock(options, stock) {
@@ -141,16 +166,10 @@ function setStock(options, stock) {
 
 
 var getChart = function(stock) {
-	if (cache.stock !== stock) {
-		if (getChartId)
-			clearInterval(getChartId);
-		cache = {
-				data: [],
-				last_id: null,
-				openPrice: null,
-				stock: null
-		};
-		var chart = new Highcharts.StockChart(setStock(chartOptions, stock));
-		getChartId = setInterval(loadData.bind(this, chart, stock), 5000);
+	if (global_cache.currentStock !== stock) {
+        pageChart.chart = new Highcharts.StockChart(setStock(chartOptions, stock));;
+        pageChart.stock = stock;
+        global_cache.currentStock = stock;
+        pageChart.load();
 	}	
 }

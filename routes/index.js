@@ -158,14 +158,3 @@ module.exports = {
 	},
 };
 
-/*var req = {params: {stock: "MAKL"}, query: {}};
-
-db.db.open(function(err){
-    if (err)
-        console.log(err);
-   else module.exports.getTrades1(req, null, function(data){
-       console.log(data);
-       process.exit(0);
-   });
-});*/
-
