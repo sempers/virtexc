@@ -1,34 +1,33 @@
 <script src="/scripts/jquery.js"></script>
 <script src="/scripts/highstock.js"></script>
 <script type="text/javascript">
-$(function() {
-	$.getJSON('/api/trades/<%=stock%>', function(data) {
+    $(function () {
+        $.getJSON('/api/trades/<%= stock %>', function (data) {
+            // Create the chart
+            $('#container').highcharts('StockChart', {
 
-		// Create the chart
-		$('#container').highcharts('StockChart', {
+                rangeSelector: {
+                    selected: 1
+                },
 
-			rangeSelector : {
-				selected : 1
-			},
+                title: {
+                    text: '<%= stock %>'
+                },
 
-			title : {
-				text : '<%=stock%>'
-			},
-
-			series : [{
-				name : '<%=stock%>',
-				data : data,
-				marker : {
-					enabled : true,
-					radius : 3
-				},
-				shadow : true,
-				tooltip : {
-					valueDecimals : 2
-				}
-			}]
-		});
-	});
-});
+                series: [{
+                    name: '<%= stock %>',
+                    data: data,
+                    marker: {
+                        enabled: true,
+                        radius: 3
+                    },
+                    shadow: true,
+                    tooltip: {
+                        valueDecimals: 2
+                    }
+                }]
+            });
+        });
+    });
 </script>
 <div id="container" style="width: 100%; height: 400px"></div>

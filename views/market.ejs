@@ -1,78 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Virtual Exchange</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="/stylesheets/bootstrap.css" rel="stylesheet">
-<link href="/stylesheets/style.css" rel="stylesheet">
-<script src="/scripts/jquery.js"></script>
-<script src="/scripts/underscore.js"></script>
-<script src="/scripts/backbone.js"></script>
-<script src="/socket.io/socket.io.js"></script>
-<script src="/scripts/highstock.js"></script>
-<script src="/scripts/chart.js"></script>
-<script src="/scripts/trade.js"></script>
+    <meta charset="utf-8">
+    <title>Virtual Exchange</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/stylesheets/bootstrap.css" rel="stylesheet">
+    <link href="/stylesheets/style.css" rel="stylesheet">
+    <script src="/scripts/jquery.js"></script>
+    <script src="/scripts/underscore.js"></script>
+    <script src="/scripts/backbone.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/scripts/highstock.js"></script>
+    <script src="/scripts/chart.js"></script>
+    <script src="/scripts/trade.js"></script>
 </head>
 <body>
-	<div class="main-container">
-		<div class="upper-line">
-		    <div class="conn-status">
-		        Connection: <span id="connection_status" class=""></span><br />
-		        DB: <span id="db_status"></span>
-		    </div>
-		    <div class="restart-panel">
-	                    <a id="restartLink" href="javascript:restartExchange()" style="display:none">Restart exchange</a>
-	                    <span id="excRestarts"><strong>Exchange is starting, please wait...</strong></span>
-	                    &nbsp;Time factor:&nbsp;<input type="text" id="timeFactor" value="1.0" />
-			</div>
-		</div>
-		<div id="main" class="row" style="display:inline-flex">
-		    <div id="left_panel" class="span3" style="margin-right: 20px; float: left">
-		        <h3>Exchange log</h3>
-		        <p></p><a href="javascript:hideLog()" id="hideLink" title="Hide log">Hide log</a></p>
-		        <div id="log" class="log">
-		        </div>
-		    </div>
-		    <div id="middle_panel" class="span12" style="float: left">
-		        <h2>Virtual stock exchange</h2>
-				<p>Here you can view live prices and a candlestick chart if you click on an appropriate stock ticker symbol. </p>
-				<div class="main-tab">
-    				  <table class="table table-bordered table-condensed">
-    					<thead>
-    						<tr class="va">
-    							<th>Symbol</th>
-    							<th>$$$</th>
-    							<th>Shares</th>
-    							<th>Equity</th>
-    							<th>BID5</th>
-    							<th>BID4</th>
-    							<th>BID3</th>
-    							<th>BID2</th>
-    							<th>BID1</th>
-    							<th>Trade</th>
-    							<th>ASK1</th>
-    							<th>ASK2</th>
-    							<th>ASK3</th>
-    							<th>ASK4</th>
-    							<th>ASK5</th>
-    							<th>Sellers</th>
-    						</tr>
-    					</thead>
-    					<tbody class="stock-data">
-    					</tbody>
-    				</table>
-    		    </div>
-    		    <div id="graph" style="width: 100%">
-    		    </div>
-			</div>
-			<div id="right_panel" class="span5" style="float: right">
-				<h3>Trading</h3>
-				<p>You can put your own orders onto the market.</p>
-				<div class="trade-ui-container">
-				</div> 
-			</div>
-		</div>
-	</div>
+<div class="main-container">
+    <div class="upper-line">
+        <div class="conn-status">
+            Connection: <span id="connection_status" class=""></span><br/>
+            DB: <span id="db_status"></span>
+        </div>
+        <div class="restart-panel">
+            <a id="restartLink" href="javascript:restartExchange()" style="display:none">Restart exchange</a>
+            <span id="excRestarts"><strong>Exchange is starting, please wait...</strong></span>
+            &nbsp;Time factor:&nbsp;<input type="text" id="timeFactor" value="1.0"/>
+        </div>
+    </div>
+    <div id="main" class="row" style="display:inline-flex">
+        <div id="left_panel" class="span3" style="margin-right: 20px; float: left">
+            <h3>Exchange log</h3>
+            <p></p><a href="javascript:hideLog()" id="hideLink" title="Hide log">Hide log</a></p>
+            <div id="log" class="log">
+            </div>
+        </div>
+        <div id="middle_panel" class="span12" style="float: left">
+            <h2>Virtual stock exchange</h2>
+            <p>Here you can view live prices and a candlestick chart if you click on an appropriate stock ticker
+                symbol. </p>
+            <div class="main-tab">
+                <table class="table table-bordered table-condensed">
+                    <thead>
+                    <tr class="va">
+                        <th>Symbol</th>
+                        <th>$$$</th>
+                        <th>Shares</th>
+                        <th>Equity</th>
+                        <th>BID5</th>
+                        <th>BID4</th>
+                        <th>BID3</th>
+                        <th>BID2</th>
+                        <th>BID1</th>
+                        <th>Trade</th>
+                        <th>ASK1</th>
+                        <th>ASK2</th>
+                        <th>ASK3</th>
+                        <th>ASK4</th>
+                        <th>ASK5</th>
+                        <th>Sellers</th>
+                    </tr>
+                    </thead>
+                    <tbody class="stock-data">
+                    </tbody>
+                </table>
+            </div>
+            <div id="graph" style="width: 100%">
+            </div>
+        </div>
+        <div id="right_panel" class="span5" style="float: right">
+            <h3>Trading</h3>
+            <p>You can put your own orders onto the market.</p>
+            <div class="trade-ui-container">
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
